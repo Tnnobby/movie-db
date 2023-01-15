@@ -1,10 +1,9 @@
 import './globals.css'
+import { LayoutProps } from '../ui/types'
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: LayoutProps) {
   return (
     <html lang="en">
       {/*
@@ -12,7 +11,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body className='h-full w-full'>{children}</body>
     </html>
   )
 }
