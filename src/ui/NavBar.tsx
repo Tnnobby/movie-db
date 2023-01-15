@@ -3,12 +3,13 @@
 import cn from "classnames";
 import React, { ReactNode } from "react";
 import { UIComponent } from "./types";
+import { usePathname } from 'next/navigation'
 
 const NavBar = ({
   children,
   className,
 }: { children?: ReactNode } & UIComponent) => {
-  const route = location.pathname.split("/");
+  const route = usePathname()?.split('/');
 
   return (
     <div className="w-full flex justify-center">
@@ -20,7 +21,7 @@ const NavBar = ({
       >
         {React.Children.map(children, (child) =>
           React.cloneElement(child as React.ReactElement, {
-            activeRoute: route[0]
+            activeRoute: route ? route[1] : ''
           })
         )}
       </div>
