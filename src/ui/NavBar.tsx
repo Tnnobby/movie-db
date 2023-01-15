@@ -8,7 +8,7 @@ const NavBar = ({
   children,
   className,
 }: { children?: ReactNode } & UIComponent) => {
-  // const route = location.pathname.split("/");
+  const route = location.pathname.split("/");
 
   return (
     <div className="w-full flex justify-center">
@@ -20,8 +20,7 @@ const NavBar = ({
       >
         {React.Children.map(children, (child) =>
           React.cloneElement(child as React.ReactElement, {
-            activeRoute: '',
-            active: true
+            activeRoute: route[0]
           })
         )}
       </div>
