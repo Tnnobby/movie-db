@@ -11,7 +11,7 @@ export type NavItemProps = {
 } & LinkProps &
   UIComponent;
 
-export default ({
+const NavItem = ({
   label,
   className,
   activeRoute,
@@ -30,3 +30,5 @@ export default ({
     {label}
   </Link>
 );
+
+export default NavItem
