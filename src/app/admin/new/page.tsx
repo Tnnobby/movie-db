@@ -2,7 +2,7 @@
 
 import AddPhotoCard, { AddPhotoCardRef } from "@/ui/AddPhotoCard";
 import Button from "@/ui/Button";
-import RatingSelect, { SelectRef } from "@/ui/RatingSelect";
+import RatingSelect, { SelectRef } from "@/ui/Rating";
 import StarRatingSelect, { StarRatingSelectRef } from "@/ui/StarRatingSelect";
 import TextArea from "@/ui/TextArea";
 import TextInput from "@/ui/TextInput";

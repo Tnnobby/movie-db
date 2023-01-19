@@ -72,4 +72,5 @@ const AddPhotoCard = forwardRef<
   );
 });
 
+AddPhotoCard.displayName = "AddPhotoCard"
 export default AddPhotoCard;

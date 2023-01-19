@@ -117,4 +117,5 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
   }
 );
 
+StarRatingSelect.displayName = "StarRatingSelect"
 export default StarRatingSelect;
