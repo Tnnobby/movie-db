@@ -6,7 +6,11 @@ module.exports = {
     "./src/ui/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        'movie': '2 / 3'
+      },
+    },
   },
   plugins: [],
 };

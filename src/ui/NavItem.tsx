@@ -20,7 +20,7 @@ const NavItem = ({
 }: NavItemProps) => (
   <Link
     className={classNames(
-      "px-2 py-0 rounded-full flex justify-center items-center font-sans font-semibold text-white text-lg transition-all hover:bg-slate-700",
+      "px-2 py-0 rounded-full flex justify-center items-center font-sans font-semibold text-white text-lg transition-all select-none hover:bg-slate-700",
       { "bg-slate-800": `/${activeRoute}` === href },
       className
     )}
@@ -31,4 +31,4 @@ const NavItem = ({
   </Link>
 );
 
-export default NavItem
+export default NavItem;
