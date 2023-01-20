@@ -17,16 +17,35 @@ const Page = () => {
   const starRatingRef = useRef<StarRatingSelectRef>(null);
   const reviewRef = useRef<HTMLTextAreaElement>(null);
 
-  const submitHandle = () => {
-    const data = {
+  const submitHandle = async () => {
+    const rawData = {
       photo: photoRef.current?.value,
       rating: ratingRef.current?.value,
       stars: starRatingRef.current?.value,
       title: titleRef.current?.value,
       review: reviewRef.current?.value,
     };
-    console.log(data)
+    const missingFields = Object.values(rawData).every(
+      (val) => val !== undefined
+    );
+    if (!missingFields) return;
+
+    if (rawData.photo) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const data = {
+          ...rawData,
+          photo: reader.result,
+          photoType: rawData.photo?.type,
+        };
+        fetch("/api/new", { method: 'POST', body: JSON.stringify(data) }).then((response) => {
+          console.log(response);
+        })
+      };
+      reader.readAsBinaryString(rawData.photo);
+    }
   };
+
   return (
     <>
       <div className="flex flex-row gap-4">

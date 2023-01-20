@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   result: boolean;
+  response?: any;
 };
 
 export default function handler(
@@ -16,8 +17,8 @@ export default function handler(
   const db = client.db("movie-db"); // Get Database
   const movies = db.collection("movies"); // Get Movie Collection
   if (data) {
-    movies.insertOne(data).then(() => {
-      res.status(200).json({ result: true });
+    movies.insertOne(data).then((response) => {
+      res.status(200).json({ result: true, response });
     });
   }
   res.status(400).json({ result: false });
