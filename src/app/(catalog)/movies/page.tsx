@@ -21,11 +21,8 @@ const Movies = () => {
 
   return (
     <div>
-      <MovieOverlay
-        data={preview}
-        onClickOff={() => setPreview(undefined)}
-      />
-      <div className="z-10 flex flex-wrap gap-4 justify-center">
+      <MovieOverlay data={preview} onClickOff={() => setPreview(undefined)} />
+      <div className="z-10 flex flex-wrap justify-center gap-4">
         {movies &&
           movies.map((val) => (
             <MovieCard
@@ -34,7 +31,9 @@ const Movies = () => {
               onClick={() => setPreview(val)}
             />
           ))}
-          {new Array(5).fill('').map(() => <div className="lg:w-48 h-0"/>)}
+        {new Array(5).fill("").map((_, i) => (
+          <div key={`ph_${i}`} className="h-0 lg:w-48" />
+        ))}
       </div>
     </div>
   );
