@@ -11,15 +11,24 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const data = req.body as Movie;
-
-  const client = new MongoClient(process.env.MONGODB_URI as string); // Connect to DB
-  const db = client.db("movie-db"); // Get Database
-  const movies = db.collection("movies"); // Get Movie Collection
-  if (data) {
-    movies.insertOne(data).then((response) => {
-      res.status(200).json({ result: true, response });
-    });
+  if (!req.body) {
+    res.status(400).json({ result: false });
+    return
   }
-  res.status(400).json({ result: false });
+
+  const data = JSON.parse(req.body);
+  const client = new MongoClient(process.env.MONGODB_URI as string); // Connect to DB
+
+  try {
+    const db = client.db("movie-db"); // Get Database
+    const movies = db.collection("movies"); // Get Movie Collection
+    if (data) {
+      movies.insertOne(data).then((response) => {
+        res.status(200).json({ result: true, response });
+      });
+    }
+  } finally {
+    client.close();
+  }
+  
 }

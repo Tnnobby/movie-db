@@ -1,9 +1,9 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import { forwardRef,  TextareaHTMLAttributes } from "react";
 import cn from "classnames";
 
 const TextArea = forwardRef<
   HTMLTextAreaElement,
-  InputHTMLAttributes<HTMLTextAreaElement>
+  TextareaHTMLAttributes<HTMLTextAreaElement>
 >(({ className, ...props }, ref) => {
   return (
     <textarea

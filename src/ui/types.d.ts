@@ -1,17 +1,19 @@
-import React from "react"
+import React from "react";
 
 export type LayoutProps = {
   children?: React.ReactNode;
-}
+};
 
 export type UIComponent = {
-  className?: string
-}
+  className?: string;
+};
 
 export type Movie = {
-  photo: string,
-  rating: string,
-  stars: number,
-  title: string,
-  review: string,
-}
+  _id?: string;
+  tmdb_id: number;
+  stars: number;
+  review: string;
+  title: string;
+  poster_path: string;
+  watch_date: number;
+};

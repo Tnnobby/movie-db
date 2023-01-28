@@ -9,10 +9,13 @@ import {
   useState,
 } from "react";
 import StarIcon from "./StarIcon";
+import cn from "classnames";
 
 export type StarRatingSelectProps = {
   initialValue?: number;
   editable?: boolean;
+  color?: string;
+  labelShown?: boolean;
 };
 
 export type StarRatingSelectRef = {
@@ -20,7 +23,7 @@ export type StarRatingSelectRef = {
 };
 
 const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
-  ({ initialValue, editable = true }, ref) => {
+  ({ initialValue, editable = true, color = "#ffd700", labelShown = true }, ref) => {
     const [rating, setRating] = useState(initialValue || 0);
     const [tempRating, setTempRating] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
@@ -52,13 +55,22 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
     };
 
     return (
-      <div className="flex flex-row rounded-md transition-all hover:shadow-md">
-        <div className="text-sans mx-2 flex select-none items-center justify-center text-lg font-bold text-yellow-400">
-          {(rating / 20) * 10}
-        </div>
+      <div
+        className={cn("flex w-min flex-row rounded-md transition-all ", {
+          "hover:shadow-md": editable,
+        })}
+      >
+        {labelShown && (
+          <div
+            className="text-sans mx-2 flex select-none items-center justify-center text-lg font-bold"
+            style={{ color }}
+          >
+            {(rating / 20) * 10}
+          </div>
+        )}
         <div
           ref={contRef}
-          className="relative cursor-pointer"
+          className={cn("relative", { "cursor-pointer": editable })}
           onMouseEnter={editable ? () => setIsHovering(true) : undefined}
           onMouseLeave={
             editable
@@ -78,7 +90,7 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
                   key={`star_select_${index}`}
                   className="py-1"
                   fill="transparent"
-                  stroke="gold"
+                  stroke={color}
                   strokeWidth={2}
                 />
               );
@@ -102,8 +114,8 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
                     <StarIcon
                       key={`star_select_${index}`}
                       className="py-1"
-                      fill="gold"
-                      stroke="gold"
+                      fill={color}
+                      stroke={color}
                       strokeWidth={2}
                     />
                   );
@@ -117,5 +129,5 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
   }
 );
 
-StarRatingSelect.displayName = "StarRatingSelect"
+StarRatingSelect.displayName = "StarRatingSelect";
 export default StarRatingSelect;
