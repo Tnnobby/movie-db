@@ -28,8 +28,8 @@ const AddMovieSearch = ({ onSelect }: AddMovieSearchProps) => {
       <div className="flex flex-col">
         <div className="flex flex-row flex-wrap justify-between gap-y-2">
           {children}
-          {new Array(5).fill("").map(() => (
-            <div className="h-0 w-32" />
+          {new Array(5).fill("").map((_, i) => (
+            <div className="h-0 w-32" key={`ph_${i}`}/>
           ))}
         </div>
         <div className="flex flex-row justify-end font-sans text-xs ">

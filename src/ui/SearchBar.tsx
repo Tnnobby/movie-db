@@ -26,15 +26,15 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
 
     useEffect(() => {
       if (debouncedSearchTerm && onSearch) onSearch(debouncedSearchTerm);
-      if (debouncedSearchTerm === '' && onClear) onClear()
-    }, [debouncedSearchTerm]);
+      if (debouncedSearchTerm === "" && onClear) onClear();
+    }, [debouncedSearchTerm, onSearch, onClear]);
 
     const searchHandle = useCallback<FormEventHandler<HTMLFormElement>>(
       (ev) => {
         ev.preventDefault();
         if (searchTerm && onSearch) onSearch(searchTerm);
       },
-      [searchTerm]
+      [searchTerm, onSearch]
     );
 
     return (
@@ -54,7 +54,10 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
           onChange={(ev) => setSearchTerm(ev.target.value)}
           {...props}
         />
-        <button type="submit" className="py-1 px-1 hover:bg-slate-300 transition-colors">
+        <button
+          type="submit"
+          className="py-1 px-1 transition-colors hover:bg-slate-300"
+        >
           <SearchIcon />
         </button>
       </form>

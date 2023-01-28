@@ -19,7 +19,7 @@ const MovieOverlay = ({ data, ...props }: MovieOverlayProps) => {
     if (data) {
       fetchData(data.tmdb_id);
     }
-  }, [data]);
+  }, [data, fetchData]);
 
   return (
     <Overlay open={!!data} {...props}>

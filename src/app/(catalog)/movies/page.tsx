@@ -29,6 +29,7 @@ const Movies = () => {
         {movies &&
           movies.map((val) => (
             <MovieCard
+              key={`movie_${val._id}`}
               data={val as any as Movie}
               onClick={() => setPreview(val)}
             />
