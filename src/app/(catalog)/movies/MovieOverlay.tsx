@@ -14,6 +14,7 @@ export type MovieOverlayProps = OverlayProps & {
 
 const MovieOverlay = ({ data, ...props }: MovieOverlayProps) => {
   const [tmdbData, fetchData] = useTmdbData();
+  const [tempData, setTempData] = useState(data);
 
   useEffect(() => {
     if (data) {
@@ -21,18 +22,26 @@ const MovieOverlay = ({ data, ...props }: MovieOverlayProps) => {
     }
   }, [data, fetchData]);
 
+  useEffect(() => {
+    if (data && data !== tempData) setTempData(data);
+  }, [data, tempData]);
+
   return (
     <Overlay open={!!data} {...props}>
-      {data && tmdbData ? (
+      {tempData && tmdbData ? (
         <div className="flex h-full w-full flex-row gap-4">
           <div className="h-fit">
-            <Poster uri={data.poster_path} alt={data.title} className="w-48 overflow-hidden rounded-md"/>
+            <Poster
+              uri={tempData.poster_path}
+              alt={tempData.title}
+              className="w-48 overflow-hidden rounded-md"
+            />
           </div>
           <div className="flex flex-grow flex-col gap-2">
             <div className="flex flex-row justify-between">
-              <Title className="text-3xl">{data.title}</Title>
+              <Title className="text-3xl">{tempData.title}</Title>
               <StarRatingSelect
-                initialValue={data.stars}
+                initialValue={tempData.stars}
                 editable={false}
                 color="black"
                 labelShown={false}
@@ -43,9 +52,7 @@ const MovieOverlay = ({ data, ...props }: MovieOverlayProps) => {
                 <Tag key={`genre_${genre.id}`}>{genre.name}</Tag>
               ))}
             </div>
-            <div className="text-lg">
-              {tmdbData.overview}
-            </div>
+            <div className="text-lg">{tmdbData.overview}</div>
           </div>
         </div>
       ) : (

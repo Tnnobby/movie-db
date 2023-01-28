@@ -18,6 +18,6 @@ export default async function handler(
 
   const client = new MovieDb(process.env.TMDB_KEY as string);
 
-  const response = await client.movieInfo({id: movieId, append_to_response: 'release_date'});
+  const response = await client.movieInfo({id: movieId, append_to_response: 'release_dates,credits'});
   res.status(200).json({ results: response });
 }
