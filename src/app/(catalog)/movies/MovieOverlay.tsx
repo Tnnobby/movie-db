@@ -53,6 +53,15 @@ const MovieOverlay = ({ data, ...props }: MovieOverlayProps) => {
               ))}
             </div>
             <div className="text-lg">{tmdbData.overview}</div>
+            <div>
+              <div className="inline font-bold">Starring: </div>
+              <i>
+                {tmdbData.credits?.cast
+                  ?.slice(0, 3)
+                  .map((cast, index) => `${cast.name}`)
+                  .join(", ")}
+              </i>
+            </div>
           </div>
         </div>
       ) : (

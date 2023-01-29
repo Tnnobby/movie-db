@@ -1,8 +1,9 @@
+import { AppendedReponse } from "@/pages/api/movie/[movieId]";
 import { MovieResponse } from "moviedb-promise";
 import { useRef, useState } from "react";
 
 const useTmdbData: () => [
-  MovieResponse | undefined,
+  AppendedReponse | undefined,
   (id: number) => Promise<any>
 ] = () => {
   const cache = useRef<{ [key: number]: any }>({});
