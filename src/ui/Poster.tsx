@@ -6,8 +6,8 @@ import cn from "classnames";
 import { UIComponent } from "./types";
 
 export type PosterProps = UIComponent & {
-  uri: string;
-  alt: string;
+  uri?: string;
+  alt?: string;
 };
 
 const Poster = ({ uri, alt, className }: PosterProps) => {
@@ -21,13 +21,15 @@ const Poster = ({ uri, alt, className }: PosterProps) => {
     }
   }, []);
 
-  return (
-    <div ref={contRef} className={cn("h-full w-full", className)}>
-      {dims && (
-        <Image src={uri} height={dims.height} width={dims.width} alt={alt} />
-      )}
-    </div>
-  );
+  if (uri && alt)
+    return (
+      <div ref={contRef} className={cn("h-full w-full", className)}>
+        {dims && (
+          <Image src={uri} height={dims.height} width={dims.width} alt={alt} />
+        )}
+      </div>
+    );
+  return <></>
 };
 
 export default Poster;

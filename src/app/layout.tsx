@@ -12,13 +12,13 @@ export default function RootLayout({ children }: LayoutProps) {
       */}
       <head />
 
-      <body className="xl:max-w-5xl m-auto">
+      <body>
         <NavBar className="mt-2">
           <NavItem href={"/"} label={"Home"} />
           <NavItem href={"/movies"} label={"Movies"} />
           <NavItem href={"/tv"} label={"TV Series"} />
         </NavBar>
-        <div className="pt-11">{children}</div>
+        <div className="m-auto pt-11 xl:max-w-5xl">{children}</div>
       </body>
     </html>
   );

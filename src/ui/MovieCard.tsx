@@ -1,6 +1,7 @@
 "use client";
 
 import cn from "classnames";
+import Link from "next/link";
 import { HTMLAttributes, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Poster from "./Poster";
@@ -54,15 +55,17 @@ const MovieCard = ({ className, data, ...props }: MovieCardProps) => {
               <StarIcon fill="gold" height="100%" width="100%" />
             </div>
           </div>
-          <div
+          <Link
             className={cn(
               "relative overflow-hidden text-sm text-white underline-offset-2 hover:cursor-pointer",
               "after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:-translate-x-full after:bg-white after:transition-all hover:after:translate-x-0"
             )}
+            onClick={(e) => e.stopPropagation()}
+            href={`/movies/${data._id}`}
           >
             Read Review
             <BsArrowRightShort className="inline" />
-          </div>
+          </Link>
         </div>
       </div>
       <Poster

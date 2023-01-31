@@ -1,3 +1,4 @@
+'use client'
 import { Player } from "@lottiefiles/react-lottie-player";
 
 const LoadingAnimation = ({ className }: { className?: string }) => {
