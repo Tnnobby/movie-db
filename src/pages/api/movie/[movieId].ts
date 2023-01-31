@@ -33,6 +33,8 @@ export default async function handler(
     append_to_response: "release_dates,credits",
   });
 
+  
+
   const release_date = response.release_dates?.results?.find(
     (res) => res.iso_3166_1 == "US"
   );

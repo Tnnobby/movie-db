@@ -45,6 +45,7 @@ const MovieOverlay = ({ data, ...props }: MovieOverlayProps) => {
                 editable={false}
                 color="black"
                 labelShown={false}
+                size="small"
               />
             </div>
             <div className="flex flex-row gap-2">

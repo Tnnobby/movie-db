@@ -16,6 +16,7 @@ export type StarRatingSelectProps = {
   editable?: boolean;
   color?: string;
   labelShown?: boolean;
+  size?: "small" | "default";
 };
 
 export type StarRatingSelectRef = {
@@ -23,7 +24,16 @@ export type StarRatingSelectRef = {
 };
 
 const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
-  ({ initialValue, editable = true, color = "#ffd700", labelShown = true }, ref) => {
+  (
+    {
+      initialValue,
+      editable = true,
+      color = "#ffd700",
+      labelShown = true,
+      size = "default",
+    },
+    ref
+  ) => {
     const [rating, setRating] = useState(initialValue || 0);
     const [tempRating, setTempRating] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
@@ -56,7 +66,7 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
 
     return (
       <div
-        className={cn("flex w-min flex-row rounded-md transition-all ", {
+        className={cn("flex w-min flex-row rounded-md transition-all", {
           "hover:shadow-md": editable,
         })}
       >
@@ -86,13 +96,18 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
           <div className="flex flex-row">
             {new Array(10).fill("").map((_, index) => {
               return (
-                <StarIcon
-                  key={`star_select_${index}`}
-                  className="py-1"
-                  fill="transparent"
-                  stroke={color}
-                  strokeWidth={2}
-                />
+                <div className={size === "small" ? "h-9 w-9" : "h-10 w-10"}>
+                  <StarIcon
+                    key={`star_select_${index}`}
+                    className="py-1"
+                    fill="transparent"
+                    height="100%"
+                    width="100%"
+                    preserveAspectRatio="true"
+                    stroke={color}
+                    strokeWidth={2}
+                  />
+                </div>
               );
             })}
           </div>
@@ -111,13 +126,17 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
               >
                 {new Array(10).fill("").map((_, index) => {
                   return (
-                    <StarIcon
-                      key={`star_select_${index}`}
-                      className="py-1"
-                      fill={color}
-                      stroke={color}
-                      strokeWidth={2}
-                    />
+                    <div className={size === "small" ? "h-9 w-9" : "h-10 w-10"}>
+                      <StarIcon
+                        key={`star_select_${index}`}
+                        className="py-1"
+                        fill={color}
+                        height="100%"
+                        width="100%"
+                        stroke={color}
+                        strokeWidth={2}
+                      />
+                    </div>
                   );
                 })}
               </div>

@@ -16,6 +16,7 @@ const AddMovieSearch = ({ onSelect }: AddMovieSearchProps) => {
   const searchHandle = async (searchTerm: string) => {
     const searchParams = new URLSearchParams();
     searchParams.append("term", searchTerm);
+    searchParams.append("type", "movie")
     return fetch(`/api/search?${searchParams.toString()}`)
       .then((res) => res.json())
       .then((final) => final.results);
