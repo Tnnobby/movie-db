@@ -12,7 +12,7 @@ export type OverlayProps = HTMLAttributes<HTMLDivElement> & {
 const Overlay = ({ open, onClickOff, children, ...props }: OverlayProps) => (
   <div
     className={cn(
-      "absolute top-0 left-0 z-10 h-full w-full overflow-hidden transition-all duration-300",
+      "fixed top-0 left-0 z-10 h-full w-full overflow-hidden transition-all duration-300",
       {
         "pointer-events-none backdrop-blur-0": !open,
         "pointer-events-auto backdrop-blur-sm": open,
