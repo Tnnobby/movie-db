@@ -1,14 +1,12 @@
 import getMovieDetails from "@/db-api/getMovieDetails";
 import MovieSummary from "@/ui/MovieSummary";
-import Poster from "@/ui/Poster";
-import StarRatingSelect from "@/ui/StarRatingSelect";
-import Title from "@/ui/Title";
 import { PageProps } from "@/ui/types";
 import Link from "next/link";
 import { BsChevronLeft } from "react-icons/bs";
 
-const Page = async ({ params }: PageProps<{ movieId: string }>) => {
-  const { movieId } = params;
+const Page = async ({
+  params: { movieId = null },
+}: PageProps<{ movieId: string | null }>) => {
   const movieData = await getMovieDetails(movieId);
 
   return (

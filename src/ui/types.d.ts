@@ -1,6 +1,6 @@
 import React from "react";
 
-export type Params = { [key: string]: string | string[] };
+export type Params = { [key: string]: string | string[] | null};
 
 export type LayoutProps = {
   children?: React.ReactNode;

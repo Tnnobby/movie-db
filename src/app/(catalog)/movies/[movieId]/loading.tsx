@@ -1,5 +1,4 @@
 import LoadingAnimation from "@/ui/LoadingAnimation";
-import LoadingContainer from "@/ui/LoadingContainer";
 import { ReactNode } from "react";
 
 const Loading = ({ children }: { children?: ReactNode }) => {

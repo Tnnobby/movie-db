@@ -4,32 +4,37 @@ import { MongoClient, ObjectId } from "mongodb";
 import { MovieDb, MovieResponse } from "moviedb-promise";
 
 const getMovieDetails: (
-  movieId: string
-) => Promise<(Movie & MovieResponse) | undefined> = async (movieId: string) => {
-  const client = new MongoClient(process.env.MONGODB_URI as string); // Connect to DB
-  const db = client.db("movie-db"); // Get Database
-  const movies = db.collection("movies"); // Get Movie Collection
+  movieId: string | null
+) => Promise<(Movie & MovieResponse) | null> = async (movieId) => {
+  if (!movieId) return null;
+  try {
+    const client = new MongoClient(process.env.MONGODB_URI as string); // Connect to DB
+    const db = client.db("movie-db"); // Get Database
+    const movies = db.collection("movies"); // Get Movie Collection
 
-  const mongoData = await movies.findOne({ _id: new ObjectId(movieId) });
+    const mongoData = await movies.findOne({ _id: new ObjectId(movieId) });
 
-  client.close()
+    client.close();
 
-  if (mongoData) {
-    // Doc found
-    const tmdbClient = new MovieDb(process.env.TMDB_KEY as string);
+    if (mongoData) {
+      // Doc found
+      const tmdbClient = new MovieDb(process.env.TMDB_KEY as string);
 
-    const tmdbData: AppendedReponse = await tmdbClient.movieInfo({
-      id: (mongoData as unknown as Movie).tmdb_id,
-      append_to_response: "release_dates,credits",
-    });
+      const tmdbData: AppendedReponse = await tmdbClient.movieInfo({
+        id: (mongoData as unknown as Movie).tmdb_id,
+        append_to_response: "release_dates,credits",
+      });
 
-    return {
-      ...tmdbData,
-      ...(mongoData as unknown as Movie),
-    };
-  } else {
-    // No doc found
-    return;
+      return {
+        ...tmdbData,
+        ...(mongoData as unknown as Movie),
+      };
+    } else {
+      // No doc found
+      return null;
+    }
+  } catch {
+    return null;
   }
 };
 
