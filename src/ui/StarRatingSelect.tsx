@@ -96,9 +96,8 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
           <div className="flex flex-row">
             {new Array(10).fill("").map((_, index) => {
               return (
-                <div className={size === "small" ? "h-9 w-9" : "h-10 w-10"}>
+                <div key={`star_select_${index}`} className={size === "small" ? "h-9 w-9" : "h-10 w-10"}>
                   <StarIcon
-                    key={`star_select_${index}`}
                     className="py-1"
                     fill="transparent"
                     height="100%"
@@ -126,9 +125,8 @@ const StarRatingSelect = forwardRef<StarRatingSelectRef, StarRatingSelectProps>(
               >
                 {new Array(10).fill("").map((_, index) => {
                   return (
-                    <div className={size === "small" ? "h-9 w-9" : "h-10 w-10"}>
+                    <div key={`star_select_${index}`} className={size === "small" ? "h-9 w-9" : "h-10 w-10"}>
                       <StarIcon
-                        key={`star_select_${index}`}
                         className="py-1"
                         fill={color}
                         height="100%"
